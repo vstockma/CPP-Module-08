@@ -6,7 +6,7 @@
 /*   By: vstockma <vstockma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/15 11:24:29 by vstockma          #+#    #+#             */
-/*   Updated: 2023/11/16 15:19:05 by vstockma         ###   ########.fr       */
+/*   Updated: 2023/11/17 13:56:57 by vstockma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,14 @@ class Span
         Span(const Span& copy);
         Span& operator=(const Span& copy);
         ~Span();
+        
         void    addNumber(int number);
         int     shortestSpan() const;
         int     longestSpan() const;
-        
+
+        template <typename Input>
+        void addRange(Input first, Input last);
+        void printData() const;
 };
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: vstockma <vstockma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/15 11:28:38 by vstockma          #+#    #+#             */
-/*   Updated: 2023/11/16 15:23:06 by vstockma         ###   ########.fr       */
+/*   Updated: 2023/11/17 13:56:00 by vstockma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,33 +16,28 @@ Span::Span()
 {
     _max_amount = 0;
     _data.reserve(0);
-    std::cout << "Default constructor called" << std::endl;
 }
 
 Span::Span(unsigned int N)
 {
     _max_amount = N;
     _data.reserve(N);
-    std::cout << "Constructor called" << std::endl;
 }
 
 Span::Span(const Span& copy)
 {
     *this = copy;
-    std::cout << "Copy constructor called" << std::endl;
 }
 
 Span& Span::operator=(const Span& copy)
 {
     _max_amount = copy._max_amount;
     _data = copy._data;
-    std::cout << "Copy assignment operator called" << std::endl;
     return *this;
 }
 
 Span::~Span()
 {
-    std::cout << "Destructor called" << std::endl;
 }
 
 void    Span::addNumber(int number)
@@ -78,4 +73,26 @@ int    Span::longestSpan() const
     std::vector<int> sorteddata = _data;
     std::sort(sorteddata.begin(), sorteddata.end());
     return sorteddata.back() - sorteddata.front();
+}
+
+template <typename Input>
+void Span::addRange(Input first, Input last)
+{
+    size_t count = std::distance(first, last);
+    if (_data.size() + count > _max_amount)
+        throw std::out_of_range("Adding this range exceeds the maximum capacity of Span");
+
+    _data.insert(_data.end(), first, last);
+}
+
+void Span::printData() const
+{
+    std::cout << "Data vector: ";
+    for (size_t i = 0; i < _data.size(); ++i)
+    {
+        std::cout << _data[i];
+        if (i < _data.size() - 1)
+            std::cout << ", ";
+    }
+    std::cout << std::endl;
 }
